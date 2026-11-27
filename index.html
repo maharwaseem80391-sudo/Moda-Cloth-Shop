@@ -1,0 +1,342 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MODA | Premium Fashion Store</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="navbar">
+  <a href="#home" class="logo">MODA<span>.</span></a>
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#shop">Shop</a>
+    <a href="#collections">Collections</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <div class="nav-actions">
+    <button onclick="toggleSearch()" title="Search">⌕</button>
+    <button onclick="showLogin()" title="Account">♙</button>
+    <button onclick="showWishlist()" title="Wishlist">♡ <small id="wishCount">0</small></button>
+    <button onclick="openCart()" title="Cart">♧ <small id="cartCount">0</small></button>
+    <button class="login-btn" onclick="showLogin()" id="loginButton">Login</button>
+    <span id="userName"></span>
+  </div>
+</header>
+
+<div class="search-bar" id="searchBar">
+  <input id="searchInput" placeholder="Search clothes, hoodies, jeans..." oninput="renderProducts()">
+  <button onclick="toggleSearch()">✕</button>
+</div>
+
+<main>
+<section class="hero" id="home">
+  <div class="hero-content">
+    <span class="eyebrow">NEW SEASON / 2026 COLLECTION</span>
+    <h1>STYLE<br>STUDIO<span>.</span></h1>
+    <h2>New Season Collection</h2>
+    <p>Discover the latest trends crafted for the modern wardrobe. Timeless essentials, effortless style.</p>
+    <a href="#shop" class="black-btn">Shop Now ↗</a>
+    <div class="hero-note">FREE SHIPPING ON ORDERS OVER $75</div>
+  </div>
+  <div class="hero-image">
+    <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=1000" alt="Fashion model wearing modern clothing">
+    <div class="floating-tag tag-one">NEW COLLECTION</div>
+    <div class="floating-tag tag-two">MODERN ESSENTIALS</div>
+  </div>
+  <div class="floating-clothes clothes-one">✦</div>
+  <div class="floating-clothes clothes-two">✧</div>
+</section>
+
+<section class="categories section" id="collections">
+  <div class="section-heading">
+    <div><span class="eyebrow">EXPLORE OUR WORLD</span><h2>Shop by category</h2></div>
+    <a href="#shop" class="text-link">View all products ↗</a>
+  </div>
+  <div class="category-grid">
+    <div class="category-card" onclick="filterCategory('T-Shirts')">
+      <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=700" alt="T-shirts">
+      <div><h3>T-SHIRTS</h3><p>Everyday essentials</p></div>
+    </div>
+    <div class="category-card" onclick="filterCategory('Hoodies')">
+      <img src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=700" alt="Hoodies">
+      <div><h3>HOODIES</h3><p>Cozy & modern</p></div>
+    </div>
+    <div class="category-card" onclick="filterCategory('Jeans')">
+      <img src="https://images.unsplash.com/photo-1542272604-787c3835535d?w=700" alt="Jeans">
+      <div><h3>JEANS</h3><p>Classic fit styles</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="shop section" id="shop">
+  <div class="section-heading">
+    <div><span class="eyebrow">CURATED FOR YOUR STYLE</span><h2>Our Collection</h2></div>
+    <p class="muted">Discover pieces made to be worn, loved and lived in.</p>
+  </div>
+
+  <div class="shop-layout">
+    <aside class="filters">
+      <div class="filter-title"><h3>Filters</h3><button onclick="clearFilters()">Clear All</button></div>
+      <h4>Category</h4>
+      <div id="categoryFilters">
+        <label><input type="checkbox" value="T-Shirts"> T-Shirts</label>
+        <label><input type="checkbox" value="Hoodies"> Hoodies</label>
+        <label><input type="checkbox" value="Kurtis"> Kurtis</label>
+        <label><input type="checkbox" value="Jeans"> Jeans</label>
+        <label><input type="checkbox" value="Jackets"> Jackets</label>
+        <label><input type="checkbox" value="Shirts"> Shirts</label>
+        <label><input type="checkbox" value="Dresses"> Dresses</label>
+        <label><input type="checkbox" value="Shoes"> Shoes</label>
+      </div>
+      <h4>Size</h4>
+      <div class="size-filter">
+        <button onclick="setSize('S',this)">S</button>
+        <button onclick="setSize('M',this)">M</button>
+        <button onclick="setSize('L',this)">L</button>
+        <button onclick="setSize('XL',this)">XL</button>
+      </div>
+      <h4>Price Range</h4>
+      <div class="price-label"><span>$20</span><span id="priceValue">$129</span></div>
+      <input type="range" id="priceRange" min="20" max="129" value="129">
+      <h4>Color</h4>
+      <div class="colors">
+        <button class="color-dot" style="background:#d9c5a7" onclick="setColor('Beige',this)" aria-label="Beige"></button>
+        <button class="color-dot" style="background:#111" onclick="setColor('Black',this)" aria-label="Black"></button>
+        <button class="color-dot" style="background:#6b7a4f" onclick="setColor('Olive',this)" aria-label="Olive"></button>
+        <button class="color-dot" style="background:#8298ae" onclick="setColor('Blue',this)" aria-label="Blue"></button>
+        <button class="color-dot" style="background:#fff;border:1px solid #ccc" onclick="setColor('White',this)" aria-label="White"></button>
+      </div>
+      <h4>Collection</h4>
+      <div class="collection-filters">
+        <label><input type="checkbox" value="NEW" class="tag-filter"> New In</label>
+        <label><input type="checkbox" value="BESTSELLER" class="tag-filter"> Bestseller</label>
+        <label><input type="checkbox" value="SALE" class="tag-filter"> Sale</label>
+      </div>
+    </aside>
+
+    <div class="products-area">
+      <div class="products-toolbar">
+        <span id="productCount">12 Products</span>
+        <select id="sortSelect" onchange="renderProducts()">
+          <option value="popular">Sort: Popular</option>
+          <option value="low">Price: Low to High</option>
+          <option value="high">Price: High to Low</option>
+        </select>
+      </div>
+      <div class="product-grid" id="productGrid"></div>
+    </div>
+  </div>
+</section>
+
+<section class="product-detail section" id="productDetail">
+  <div class="detail-heading">
+    <span class="eyebrow">PRODUCT SPOTLIGHT</span>
+    <h2>Essential 3D Hoodie</h2>
+  </div>
+  <div class="detail-layout">
+    <div class="detail-gallery">
+      <div class="detail-main-image" id="detailImage">
+        <span class="view-badge">360° PRODUCT VIEW</span>
+        <img id="detailMainImg" src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=900" alt="Essential hoodie">
+        <span class="drag-hint">↔ Drag to explore</span>
+      </div>
+      <div class="thumbnails">
+        <img onclick="changeDetailImage(this)" src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=200" alt="Hoodie front">
+        <img onclick="changeDetailImage(this)" src="https://images.unsplash.com/photo-1551488831-00ddcb6c6bd3?w=200" alt="Fashion look">
+        <img onclick="changeDetailImage(this)" src="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=200" alt="Clothing detail">
+      </div>
+    </div>
+    <div class="detail-info">
+      <span class="eyebrow">PREMIUM COLLECTION</span>
+      <h2>ESSENTIAL 3D HOODIE</h2>
+      <p class="rating">★★★★★ <span>4.8 (127 reviews)</span></p>
+      <h2 class="detail-price">$89.00</h2>
+      <p>Premium heavyweight 420GSM cotton. Designed for comfort with a modern relaxed fit and exceptional attention to detail.</p>
+      <h4>Color</h4>
+      <div class="detail-colors">
+        <button style="background:#111" onclick="chooseDetailColor(this)" aria-label="Black"></button>
+        <button style="background:#d9c5a7" onclick="chooseDetailColor(this)" aria-label="Beige"></button>
+        <button style="background:#6b7a4f" onclick="chooseDetailColor(this)" aria-label="Olive"></button>
+        <button style="background:#263d55" onclick="chooseDetailColor(this)" aria-label="Navy"></button>
+      </div>
+      <h4>Size <button class="size-chart-link" onclick="showSizeChart()">Size Chart ↗</button></h4>
+      <div class="detail-sizes">
+        <button>S</button><button class="selected">M</button><button>L</button><button>XL</button><button>XXL</button>
+      </div>
+      <h4>Quantity</h4>
+      <div class="quantity-control">
+        <button onclick="changeDetailQty(-1)">−</button><span id="detailQty">1</span><button onclick="changeDetailQty(1)">+</button>
+      </div>
+      <button class="black-btn full-btn" onclick="addDetailToCart()">♧ Add to Cart</button>
+      <button class="outline-btn full-btn" onclick="addWishlist(2)">♡ Add to Wishlist</button>
+      <div class="shipping-info">♧ Free shipping on orders over $100<br>↩ Free 30-day returns & exchanges</div>
+    </div>
+  </div>
+</section>
+
+<section class="about section" id="about">
+  <div class="about-image">
+    <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=900" alt="Fashion collection">
+  </div>
+  <div class="about-text">
+    <span class="eyebrow">OUR PHILOSOPHY</span>
+    <h2>Less, but<br>better.</h2>
+    <p>At MODA, we believe great style starts with thoughtfully chosen essentials. We bring together timeless silhouettes, quality fabrics and modern design to make everyday dressing effortless.</p>
+    <a href="#shop" class="black-btn">Discover MODA ↗</a>
+  </div>
+</section>
+
+<section class="checkout section" id="checkout">
+  <div class="section-heading">
+    <div><span class="eyebrow">ALMOST YOURS</span><h2>Secure Checkout</h2></div>
+  </div>
+  <div class="checkout-layout">
+    <div>
+      <div class="checkout-card">
+        <h3>Delivery Address</h3>
+        <div class="form-grid">
+          <label class="wide">Full Name<input id="fullName" placeholder="Emma Johnson" required></label>
+          <label>Email Address<input id="email" type="email" placeholder="emma@email.com" required></label>
+          <label>Phone Number<input id="phone" placeholder="+92 300 1234567" required></label>
+          <label class="wide">Street Address<input id="address" placeholder="Street, house number" required></label>
+          <label>City<input id="city" placeholder="Lahore" required></label>
+          <label>Postal Code<input id="postal" placeholder="54000"></label>
+          <label class="wide">Country<select id="country"><option>Pakistan</option><option>United States</option><option>United Kingdom</option><option>United Arab Emirates</option></select></label>
+        </div>
+      </div>
+      <div class="checkout-card">
+        <h3>Payment Method</h3>
+        <label class="payment-option"><input type="radio" name="payment" value="Card" checked> Credit / Debit Card</label>
+        <div class="form-grid">
+          <label class="wide">Card Number<input placeholder="1234 5678 9012 3456"></label>
+          <label>Expiry Date<input placeholder="MM/YY"></label>
+          <label>CVC<input placeholder="•••"></label>
+        </div>
+        <label class="payment-option"><input type="radio" name="payment" value="COD"> Cash on Delivery</label>
+        <label class="payment-option"><input type="radio" name="payment" value="JazzCash"> JazzCash</label>
+      </div>
+    </div>
+    <div class="checkout-card summary-card">
+      <h3>Order Summary</h3>
+      <div id="checkoutItems"></div>
+      <div class="promo-row"><input id="checkoutPromo" placeholder="ENTER CODE"><button onclick="applyCheckoutPromo()">Apply</button></div>
+      <div class="summary-line"><span>Subtotal</span><b id="checkoutSubtotal">$0.00</b></div>
+      <div class="summary-line"><span>Shipping</span><b>Free</b></div>
+      <div class="summary-line total-line"><span>Total</span><b id="checkoutTotal">$0.00</b></div>
+      <button class="black-btn full-btn" onclick="placeOrder()">Place Order ↗</button>
+      <p class="muted small">♙ Secure demo checkout · No real payment is processed.</p>
+    </div>
+  </div>
+</section>
+
+<section class="admin section" id="admin">
+  <div class="admin-shell">
+    <aside class="admin-sidebar">
+      <h2>MODA <span>ADMIN</span></h2>
+      <button class="active">◫ Dashboard</button>
+      <button>▤ Orders</button><button>▦ Inventory</button>
+      <button>♙ Customers</button><button>▣ Products</button>
+      <button>⌁ Analytics</button><button>◇ Marketing</button>
+      <button>⚙ Settings</button><button>ⓘ Help</button>
+      <div class="admin-user">● Admin<br><small>Store manager</small></div>
+    </aside>
+    <div class="admin-main">
+      <div class="admin-top"><div><span class="eyebrow">STORE OVERVIEW</span><h2>Dashboard & Order Tracking</h2></div><span>Last 30 days⌄</span></div>
+      <div class="stats-grid">
+        <div class="stat-card"><p>Total Revenue</p><h2>$48,392</h2><span>↗ +12.5% vs last month</span></div>
+        <div class="stat-card"><p>Total Orders</p><h2>1,274</h2><span>↗ +8.2% vs last month</span></div>
+        <div class="stat-card"><p>Active Customers</p><h2>843</h2><span>↗ +5.1% vs last month</span></div>
+        <div class="stat-card"><p>Inventory Items</p><h2>392</h2><span class="warning">18 low stock</span></div>
+      </div>
+      <div class="admin-content-grid">
+        <div class="admin-panel"><h3>Sales Overview</h3><p class="muted">Revenue trend for the last 30 days</p><div class="chart" id="salesChart"></div><div class="chart-labels">Oct 1　 Oct 7　 Oct 14　 Oct 21　 Oct 28</div></div>
+        <div class="admin-panel">
+          <h3>Order Tracking</h3>
+          <div class="tracking-steps"><span>● Ordered</span><span>● Shipped</span><span>● Delivered</span></div>
+          <div class="progress"><span></span></div>
+          <p class="muted">85% delivered · 12 in transit · 5 pending</p>
+          <h3>Recent Orders</h3>
+          <div class="table-wrap"><table><thead><tr><th>Order ID</th><th>Product</th><th>Amount</th><th>Status</th></tr></thead><tbody>
+            <tr><td>#1284</td><td>Cotton Linen Jacket</td><td>$129</td><td>Delivered</td></tr>
+            <tr><td>#1283</td><td>Sneakers</td><td>$95</td><td>Shipped</td></tr>
+            <tr><td>#1282</td><td>Wool Sweater</td><td>$72</td><td>Ordered</td></tr>
+            <tr><td>#1281</td><td>Canvas Tote Bag</td><td>$34</td><td>Delivered</td></tr>
+          </tbody></table></div>
+        </div>
+        <div class="admin-panel"><h3>Inventory Products</h3><p>Beige Wool Coat — 24 units</p><p>Black T-Shirt — 8 units <span class="warning">Low stock</span></p><p>Street Hoodie — 42 units</p></div>
+        <div class="admin-panel"><h3>Customer List</h3><p>Sophia R. <span class="status">Active</span></p><p>James D. <span class="status">Active</span></p><p>Mia T. <span class="warning">Inactive</span></p></div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer id="contact">
+  <div class="footer-grid">
+    <div><a href="#home" class="logo">MODA<span>.</span></a><p>Modern essentials.<br>Timeless style.</p></div>
+    <div><h4>Explore</h4><a href="#shop">Shop</a><a href="#collections">Collections</a><a href="#about">About us</a></div>
+    <div><h4>Help</h4><a href="#contact">Contact</a><a href="#checkout">Shipping & Returns</a><a href="#checkout">Order Support</a></div>
+    <div><h4>Stay in style</h4><p>Get updates on new collections.</p><div class="newsletter"><input id="newsletterEmail" type="email" placeholder="Your email"><button onclick="subscribe()">↗</button></div><p id="newsletterMessage"></p></div>
+  </div>
+  <div class="footer-bottom"><span>© 2026 MODA Studio. All rights reserved.</span><span>Free shipping over $75 · 30-day returns</span><span>Instagram ↗</span></div>
+</footer>
+
+<div class="overlay" id="overlay" onclick="closePanels()"></div>
+<aside class="cart-drawer" id="cartDrawer">
+  <div class="drawer-head"><h2>Your Cart (<span id="drawerCount">0</span>)</h2><button onclick="closePanels()">✕</button></div>
+  <div id="cartItems" class="cart-items"></div>
+  <div class="cart-bottom">
+    <div class="promo-row"><input id="promoInput" placeholder="ENTER CODE"><button onclick="applyPromo()">Apply</button></div>
+    <p id="promoMessage" class="muted small"></p>
+    <div class="summary-line"><span>Subtotal</span><b id="subtotal">$0.00</b></div>
+    <div class="summary-line"><span>Discount</span><b id="discount">$0.00</b></div>
+    <div class="summary-line"><span>Shipping</span><b>Free</b></div>
+    <div class="summary-line total-line"><span>Total</span><b id="total">$0.00</b></div>
+    <button class="black-btn full-btn" onclick="goCheckout()">Checkout ↗</button>
+  </div>
+</aside>
+
+<div class="modal" id="loginModal">
+  <button class="modal-close" onclick="closeModals()">✕</button>
+  <div class="tabs"><button class="active" onclick="switchTab('login')">Login</button><button onclick="switchTab('signup')">Signup</button></div>
+  <h2 id="loginTitle">Welcome back!</h2>
+  <p>Sign in to continue to your account</p>
+  <form onsubmit="fakeLogin(event)">
+    <input id="loginName" placeholder="Your name" class="signup-field hidden">
+    <input id="loginEmail" type="email" placeholder="Email" required>
+    <input type="password" placeholder="Password" required>
+    <label class="remember"><input type="checkbox"> Remember me</label>
+    <button class="black-btn full-btn">Login</button>
+  </form>
+  <p class="muted small">or continue with</p>
+  <button class="outline-btn full-btn" onclick="fakeGoogle()">G Continue with Google</button>
+</div>
+
+<div class="modal small-modal" id="successModal">
+  <div class="success-icon">✓</div><h2>Order Placed!</h2>
+  <p id="successMessage">Thank you for shopping with MODA.</p>
+  <button class="black-btn full-btn" onclick="closeModals()">Continue Shopping</button>
+</div>
+
+<div class="modal small-modal" id="sizeModal">
+  <button class="modal-close" onclick="closeModals()">✕</button>
+  <h2>Size Guide</h2>
+  <table><tr><th>Size</th><th>Chest</th><th>Length</th></tr><tr><td>S</td><td>36"</td><td>26"</td></tr><tr><td>M</td><td>40"</td><td>27"</td></tr><tr><td>L</td><td>44"</td><td>28"</td></tr><tr><td>XL</td><td>48"</td><td>29"</td></tr><tr><td>XXL</td><td>52"</td><td>30"</td></tr></table>
+</div>
+
+<div class="modal" id="wishlistModal">
+  <button class="modal-close" onclick="closeModals()">✕</button>
+  <h2>Your Wishlist ♡</h2>
+  <div id="wishlistItems"></div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
